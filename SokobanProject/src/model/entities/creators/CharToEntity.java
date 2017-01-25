@@ -1,8 +1,7 @@
-package model.entities;
+package model.entities.creators;
 
 import java.util.HashMap;
 
-import creators.*;
 
 //This class link each ASCII character to Entity Creator.
 public class CharToEntity {

@@ -2,8 +2,8 @@ package model.entities;
 
 import java.io.Serializable;
 
-import levels.Direction2D;
-import movements.Movement;
+import commons.CommonEntity;
+import model.Position2D;
 
 //This is the abstract super class of all entities in the game.
 //It have only attribute of position in game.
@@ -24,6 +24,11 @@ public abstract class AbstractEntity implements Serializable{
 
 	public void setPosition(Position2D position) {
 		this.position = position;
+	}
+	
+	public CommonEntity getCommon()
+	{
+		return new CommonEntity(this.getClass().getSimpleName(), position.getCommon());
 	}
 
 

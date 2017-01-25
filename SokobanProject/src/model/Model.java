@@ -1,10 +1,15 @@
 package model;
 
-import commons.CommonLevelField;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import commons.CommonEntity;
+import commons.CommonLevel;
+import commons.Direction2D;
 
 public interface Model {
-	//public void move(Direction2D dir);
-	public void load(String filename,String filetype);
-	public void save(String filename,String filetype);
-	public CommonLevelField getLevel();
+	public void move(Direction2D dir);
+	public void load(String filepath,String filetype) throws ClassNotFoundException, FileNotFoundException, IOException;
+	public void save(String filepath,String filetype) throws FileNotFoundException, IOException;
+	public CommonLevel getLevel();
 }

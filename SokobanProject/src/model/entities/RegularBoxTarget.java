@@ -1,6 +1,6 @@
 package model.entities;
 
-import policies.RegularObjectPolicy;
+import model.Position2D;
 
 //This is the class of the ordinary Box Target
 public class RegularBoxTarget extends BoxTarget {

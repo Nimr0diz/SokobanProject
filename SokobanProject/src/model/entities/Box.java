@@ -1,8 +1,8 @@
 package model.entities;
 
-import commons.Direction2D;
 import model.Position2D;
-import policies.Policy;
+import model.policies.Policy;
+
 
 //This is the abstract super class of all the boxes in the game.
 //The SolidiEntity has Position (from AbstractEntity) and Policy (from SolidEntity).

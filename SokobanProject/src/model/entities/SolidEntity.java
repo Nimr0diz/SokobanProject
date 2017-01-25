@@ -1,8 +1,8 @@
 package model.entities;
 
-import levels.Direction2D;
-import movements.Movement;
-import policies.Policy;
+import commons.Direction2D;
+import model.Position2D;
+import model.policies.Policy;
 
 //This is the abstract super class of all the solid entities in the game.
 //The SolidiEntity has Position (from AbstractEntity) and Policy.

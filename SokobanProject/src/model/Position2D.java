@@ -79,4 +79,9 @@ public class Position2D implements Position<Direction2D>{
 			return true;
 		return false;
 	}
+	
+	public CommonPosition getCommon()
+	{
+		return new CommonPosition(x,y);
+	}
 }

@@ -1,7 +1,7 @@
 package model.entities;
 
-import movements.NoMovement;
-import policies.WallPolicy;
+import model.Position2D;
+import model.policies.WallPolicy;
 
 //This is the abstract super class of all the walls in the game.
 //The SolidiEntity has Position (from AbstractEntity) and Policy (from SolidEntity).

@@ -1,6 +1,7 @@
 package model.entities;
 
-import policies.RegularObjectPolicy;
+import model.Position2D;
+import model.policies.RegularObjectPolicy;
 
 //This is the class of the ordinary Figure
 //This Figure use Regular Object Policy

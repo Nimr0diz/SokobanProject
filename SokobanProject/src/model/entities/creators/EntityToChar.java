@@ -1,6 +1,12 @@
-package model.entities;
+package model.entities.creators;
 
 import java.util.HashMap;
+
+import model.entities.AbstractEntity;
+import model.entities.RegularBox;
+import model.entities.RegularBoxTarget;
+import model.entities.RegularFigure;
+import model.entities.RegularWall;
 
 //This class link each Entity Creator to ASCII character.
 public class EntityToChar {
