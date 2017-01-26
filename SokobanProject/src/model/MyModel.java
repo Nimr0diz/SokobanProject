@@ -51,19 +51,22 @@ public class MyModel extends Observable implements Model {
 	}
 	
 	@Override
-	public void move(Direction2D dir) {
+	public boolean move(Direction2D dir) {
 		LevelManager lm=new LevelManager(level);
-		lm.move(level.getFirstFigure(), dir);
-		setChanged();
-		notifyObservers();
+		return lm.move(level.getFirstFigure(), dir);
 	}
 
 	@Override
-	public void load(String filepath, String filetype) throws ClassNotFoundException, FileNotFoundException, IOException {
+	public void load(String filepath, String filetype) {
+		try{
 		LevelLoader ll = levelLoaderList.get(filetype);
 		level = ll.loadLevel(new FileInputStream(filepath));
 		setChanged();
-		notifyObservers();
+		}catch(Exception ex)
+		{
+			notifyObservers("LoadFailed " + ex.getMessage());
+		}
+		notifyObservers("LoadCompleted " + filepath);
 	}
 
 	@Override
@@ -74,7 +77,7 @@ public class MyModel extends Observable implements Model {
 		setChanged();
 		}catch(Exception ex)
 		{
-			notifyObservers("SaveFailed" +ex.getMessage());
+			notifyObservers("SaveFailed " + ex.getMessage());
 		}
 		notifyObservers("SaveCompleted "+filepath);
 

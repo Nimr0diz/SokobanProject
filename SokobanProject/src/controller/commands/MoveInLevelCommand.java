@@ -4,13 +4,16 @@ import java.util.HashMap;
 
 import commons.Direction2D;
 import model.Model;
+import view.View;
 
 public class MoveInLevelCommand extends Command {
 	Model model;
+	View view;
 	
 	HashMap<String,Direction2D> directionList; //The HashMap link each string of direction to the specific Direction
-		public MoveInLevelCommand(Model model) {
+		public MoveInLevelCommand(Model model,View view) {
 			this.model=model;
+			this.view=view;
 			//Initializing the HashMap.
 			directionList = new HashMap<String,Direction2D>();
 			
@@ -25,7 +28,7 @@ public class MoveInLevelCommand extends Command {
 		//The method moves the first figure to the direction he get from the user. 
 		public void execute() {
 			Direction2D dir = directionList.get(params.get(0));
-			//if(dir==null){throw new InvalidDirectionException(direction);} //If the direction the method get by input is invalid it throws InvalidFileTypeException.
-			model.move(dir); //Create new LevelManager who control the Level and moves the first figure.
+			boolean isMoved = model.move(dir); //Create new LevelManager who control the Level and moves the first figure.
+			view.positionHasChanged(isMoved);
 		}
 }
