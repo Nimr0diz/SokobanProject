@@ -67,11 +67,16 @@ public class MyModel extends Observable implements Model {
 	}
 
 	@Override
-	public void save(String filepath, String filetype) throws FileNotFoundException, IOException {
+	public void save(String filepath, String filetype) {
+		try{ 
 		LevelSaver ls = levelSaverList.get(filetype);
 		ls.saveLevel(level, new FileOutputStream(filepath));
 		setChanged();
-		notifyObservers();
+		}catch(Exception ex)
+		{
+			notifyObservers("SaveFailed" +ex.getMessage());
+		}
+		notifyObservers("SaveCompleted "+filepath);
 
 	}
 

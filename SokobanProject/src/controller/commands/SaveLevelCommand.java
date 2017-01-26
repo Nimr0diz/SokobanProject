@@ -33,9 +33,7 @@ public class SaveLevelCommand extends Command {
 	//If the file isn't exist the method create new one.
 	public void execute() {
 		String filetype = params.get(0).substring(params.get(0).lastIndexOf(".")+1);//Get the letters after the '.' to get the file type
-		//LevelSaver ls= levelSaverList.get(filetype);
-		//if(ls==null){throw new InvalidFileTypeException(filetype);}//If the file type doesn't have the concurrent LevelSaver it throws InvalidFileTypeException
-		//ls.saveLevel(level, new FileOutputStream(filename));
+		model.save(params.get(0), filetype);
 	}
 	
 
