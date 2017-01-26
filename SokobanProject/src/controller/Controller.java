@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -12,7 +13,7 @@ public class Controller {
 	protected boolean stop;
 	
 	public Controller() {
-		queue = new PriorityBlockingQueue<Command>();
+		queue = new ArrayBlockingQueue<Command>(10);
 		stop = true;
 	}
 	
@@ -37,7 +38,7 @@ public class Controller {
 				while(!stop)
 				{
 					try {
-						Command command = queue.poll(1, TimeUnit.SECONDS);
+						Command command = queue.poll(500, TimeUnit.MILLISECONDS);
 						if(command!=null)
 							command.execute();
 						if(command instanceof ExitCommand)

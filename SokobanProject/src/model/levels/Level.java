@@ -34,6 +34,9 @@ public class Level implements Serializable{
 		UnsolidEntity[] useArray = getUnsolidArray();
 		String[][] field = new String[getHeight()][getWidth()];
 		CommonEntity[] entities = new CommonEntity[seArray.length+useArray.length];
+		for(int i=0;i<getHeight();i++)
+			for(int j=0;j<getWidth();j++)
+				field[i][j] = "Nothing";
 		for(int i=0;i<useArray.length;i++)
 		{
 			UnsolidEntity tempEntity = useArray[i];
@@ -45,7 +48,7 @@ public class Level implements Serializable{
 		{
 			SolidEntity tempEntity = seArray[i];
 			field[tempEntity.getPosition().getY()][tempEntity.getPosition().getX()] = tempEntity.getCommon().getType();
-			entities[i+seArray.length] = tempEntity.getCommon();
+			entities[i+useArray.length] = tempEntity.getCommon();
 		}
 		
 		return new CommonLevel(field,entities);

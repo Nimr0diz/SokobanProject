@@ -1,4 +1,5 @@
 package controller.commands;
+import commons.CommonLevel;
 import model.Model;
 import view.View;
 
@@ -16,7 +17,8 @@ public class DisplayLevelCommand extends Command{
 	//The str parameter is irrelevant.
 	//The Command use the text levelSaver to "save" the level to the screen (System.out). 
 	public void execute() {
-		//new MyTextLevelSaver().saveLevel(level, System.out);
+		CommonLevel level = model.getLevel();
+		view.displayLevel(level);
 	}
 
 

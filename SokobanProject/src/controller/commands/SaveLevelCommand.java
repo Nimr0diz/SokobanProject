@@ -16,17 +16,8 @@ import model.Model;
 
 public class SaveLevelCommand extends Command {
 	Model model;
-	//The HashMap link each text file extension to the specific LevelSaver
-	//HashMap<String,LevelSaver> levelSaverList;
 	public SaveLevelCommand(Model model) {
 		this.model=model;
-		//Initializing the HashMap.
-		//levelSaverList = new HashMap<String,LevelSaver>();
-		
-		//levelSaverList.put("obj", new MyObjectLevelSaver());
-		//levelSaverList.put("txt", new MyTextLevelSaver());
-		//levelSaverList.put("xml", new MyXMLLevelSaver());
-
 	}
 	@Override
 	//The Method Save Level to any type of file and return it.
