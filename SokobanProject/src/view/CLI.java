@@ -14,13 +14,16 @@ import java.util.Observable;
 import commons.CommonLevel;
 
 public class CLI extends Observable implements View{
-	private BufferedReader reader;
-	private PrintWriter writer;
+	protected BufferedReader reader;
+	protected PrintWriter writer;
 	
-	private HashMap<String,Character> displayer;
-	private boolean stop;
+	protected HashMap<String,Character> displayer;
+	protected boolean stop;
 	
-	private Thread thread;
+	protected CLI(){
+		reader = null;
+		writer = null;
+	}
 	
 	public CLI(InputStream in, OutputStream out){
 		this.reader = new BufferedReader(new InputStreamReader(in));
@@ -38,7 +41,7 @@ public class CLI extends Observable implements View{
 		displayer.put("RegularBoxTarget",'O');
 		displayer.put("Nothing", ' ');
 	}
-	
+	/*
 	@Override
 	public void showSaveCompletedMessage(String filepath) {
 		writer.println("Save completed! ");
@@ -67,10 +70,11 @@ public class CLI extends Observable implements View{
 		writer.println("error: "+message);
 		writer.flush();
 	}
+	*/
 	
 	@Override
 	public void positionHasChanged(boolean isMoved) {}
-
+	
 	@Override
 	public void displayLevel(CommonLevel level) {
 		String line;
@@ -90,8 +94,9 @@ public class CLI extends Observable implements View{
 	@Override
 	public void start() 
 	{
-		 thread = new Thread(new Runnable(){
+		Thread thread = new Thread(new Runnable(){
 			
+			@Override
 			public void run(){
 				String line="";
 				while(!stop)
@@ -116,6 +121,37 @@ public class CLI extends Observable implements View{
 	@Override
 	public void stop() {
 		stop=true;
+	}
+
+	@Override
+	public void showSaveLevelMessage(boolean succeed,String param) 
+	{
+		if(succeed)
+		{
+			writer.println("Save completed! ");
+			writer.println("Level saved in \""+param+"\"" );
+			writer.flush();
+		}else{
+			writer.println("Save failed! ");
+			writer.println("error: "+param);
+			writer.flush();
+		}
+	}
+
+	@Override
+	public void showLoadLevelMessage(boolean succeed,String param) 
+	{
+		if(succeed)
+		{
+			writer.println("Load completed! ");
+			writer.println("Level loaded from \""+param+"\"" );
+			writer.flush();
+		}else{
+			writer.println("Load failed! ");
+			writer.println("error: "+param);
+			writer.flush();
+		}
+		
 	}
 
 }

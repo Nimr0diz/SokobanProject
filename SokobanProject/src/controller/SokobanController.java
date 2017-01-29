@@ -8,27 +8,49 @@ import java.util.Observer;
 import controller.commands.Command;
 import controller.commands.DisplayLevelCommand;
 import controller.commands.ExitCommand;
-import controller.commands.LoadCompletedCommand;
-import controller.commands.LoadFailedCommand;
 import controller.commands.LoadLevelCommand;
 import controller.commands.MoveInLevelCommand;
-import controller.commands.SaveCompletedCommand;
-import controller.commands.SaveFailedCommand;
 import controller.commands.SaveLevelCommand;
 import model.Model;
+import view.SokobanServer;
 import view.View;
 
 public class SokobanController implements Observer{
 
 	private Model model;
 	private View view;
+	private SokobanServer server;
+	private View client;
 	private Controller controller;
+	
 	
 	private HashMap<String,Command> commands;
 	
 	public SokobanController(Model model,View view) {
 		this.view = view;
 		this.model = model;
+		this.client = null;
+		this.controller = new Controller();
+		controller.start();
+		
+		initCommands();
+	}
+	
+	public SokobanController(Model model,View view,View client) {
+		this.view = view;
+		this.model = model;
+		this.client = client;
+		this.controller = new Controller();
+		controller.start();
+		
+		initCommands();
+	}
+	
+	public SokobanController(Model model,View view,SokobanServer server)
+	{
+		this.view = view;
+		this.model = model;
+		this.server = server;
 		this.controller = new Controller();
 		controller.start();
 		
@@ -38,16 +60,16 @@ public class SokobanController implements Observer{
 	private void initCommands(){
 		commands = new HashMap<String, Command>();
 		
-		commands.put("Display", new DisplayLevelCommand(model,view));
+		commands.put("Display", new DisplayLevelCommand(model,view,client));
 		commands.put("Exit", new ExitCommand(view));
-		commands.put("Load", new LoadLevelCommand(model));
-		commands.put("Move", new MoveInLevelCommand(model, view));
-		commands.put("Save", new SaveLevelCommand(model));
+		commands.put("Load", new LoadLevelCommand(model, view, client));
+		commands.put("Move", new MoveInLevelCommand(model, view,client));
+		commands.put("Save", new SaveLevelCommand(model,view,client));
 		
-		commands.put("LoadCompleted", new LoadCompletedCommand(view));
-		commands.put("LoadFailed", new LoadFailedCommand(view));
-		commands.put("SaveCompleted", new SaveCompletedCommand(view));
-		commands.put("SaveFailed", new SaveFailedCommand(view));
+//		commands.put("LoadCompleted", new LoadCompletedCommand(view));
+//		commands.put("LoadFailed", new LoadFailedCommand(view));
+//		commands.put("SaveCompleted", new SaveCompletedCommand(view));
+//		commands.put("SaveFailed", new SaveFailedCommand(view));
 	}
 	
 	@Override
@@ -72,4 +94,8 @@ public class SokobanController implements Observer{
 		view.start();
 	}
 	
+	public void thereIsClient()
+	{
+		this.client = server.getClient();
+	}
 }
