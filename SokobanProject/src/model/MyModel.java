@@ -57,29 +57,15 @@ public class MyModel extends Observable implements Model {
 	}
 
 	@Override
-	public void load(String filepath, String filetype) {
-		try{
+	public void load(String filepath, String filetype) throws Exception {
 		LevelLoader ll = levelLoaderList.get(filetype);
 		level = ll.loadLevel(new FileInputStream(filepath));
-		setChanged();
-		}catch(Exception ex)
-		{
-			notifyObservers("LoadFailed " + ex.getMessage());
-		}
-		notifyObservers("LoadCompleted " + filepath);
 	}
 
 	@Override
-	public void save(String filepath, String filetype) {
-		try{ 
+	public void save(String filepath, String filetype) throws Exception {
 		LevelSaver ls = levelSaverList.get(filetype);
 		ls.saveLevel(level, new FileOutputStream(filepath));
-		setChanged();
-		}catch(Exception ex)
-		{
-			notifyObservers("SaveFailed " + ex.getMessage());
-		}
-		notifyObservers("SaveCompleted "+filepath);
 
 	}
 

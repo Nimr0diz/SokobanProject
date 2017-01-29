@@ -9,7 +9,7 @@ import commons.Direction2D;
 
 public interface Model {
 	public boolean move(Direction2D dir);
-	public void load(String filepath,String filetype);
-	public void save(String filepath,String filetype);
+	public void load(String filepath,String filetype) throws Exception;
+	public void save(String filepath,String filetype) throws Exception;
 	public CommonLevel getLevel();
 }

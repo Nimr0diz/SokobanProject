@@ -7,9 +7,11 @@ public class DisplayLevelCommand extends Command{
 
 	Model model;
 	View view;
-	public DisplayLevelCommand(Model model,View view) {
+	View client;
+	public DisplayLevelCommand(Model model,View view,View client) {
 		this.model=model;
 		this.view= view;
+		this.client= client;
 	}
 	
 	@Override
@@ -19,6 +21,8 @@ public class DisplayLevelCommand extends Command{
 	public void execute() {
 		CommonLevel level = model.getLevel();
 		view.displayLevel(level);
+		if(client!=null)
+			client.displayLevel(level);
 	}
 
 
