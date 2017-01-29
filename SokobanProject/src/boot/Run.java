@@ -16,7 +16,7 @@ public class Run {
 		CLI client = (CLI)server.getClient();
 		SokobanController sokoban = new SokobanController(model, view,server);
 		server.setController(sokoban);
-		server.start();
+	//	server.start();
 		System.out.println(client);
 		model.addObserver(sokoban);
 		view.addObserver(sokoban);
